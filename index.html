@@ -1,0 +1,1173 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mannerings Estate Agency</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: "#2563eb",
+              secondary: "#f59e0b",
+            },
+            borderRadius: {
+              none: "0px",
+              sm: "4px",
+              DEFAULT: "8px",
+              md: "12px",
+              lg: "16px",
+              xl: "20px",
+              "2xl": "24px",
+              "3xl": "32px",
+              full: "9999px",
+              button: "8px",
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      :where([class^="ri-"])::before {
+        content: "\f3c2";
+      }
+      .property-search-results {
+        display: none;
+      }
+      .property-search-results.active {
+        display: block;
+      }
+    </style>
+  </head>
+  <body class="bg-gray-50">
+    <header class="bg-white shadow-sm">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center py-6">
+          <div class="flex items-center gap-3">
+            <div
+              class="w-12 h-12 relative overflow-hidden rounded-full bg-primary/10 flex items-center justify-center"
+            >
+              <canvas
+                id="logoCanvas"
+                width="48"
+                height="48"
+                class="absolute inset-0"
+              ></canvas>
+              <h1 class="text-2xl font-['Pacifico'] text-primary relative z-10">
+                M
+              </h1>
+            </div>
+            <h1 class="text-3xl font-['Pacifico'] text-primary">Mannerings</h1>
+          </div>
+          <script>
+            const canvas = document.getElementById("logoCanvas");
+            const ctx = canvas.getContext("2d");
+            let rotation = 0;
+            function drawLogo() {
+              ctx.clearRect(0, 0, 48, 48);
+              ctx.save();
+              ctx.translate(24, 24);
+              ctx.rotate(rotation);
+              for (let i = 0; i < 8; i++) {
+                ctx.beginPath();
+                ctx.rotate(Math.PI / 4);
+                ctx.moveTo(8, 0);
+                ctx.lineTo(16, 0);
+                ctx.strokeStyle = "#2563eb";
+                ctx.lineWidth = 2;
+                ctx.stroke();
+              }
+              ctx.restore();
+              rotation += 0.02;
+              requestAnimationFrame(drawLogo);
+            }
+            drawLogo();
+          </script>
+          <nav class="hidden md:flex justify-center flex-1">
+            <div class="flex space-x-8">
+              <a
+                href="index.html"
+                class="text-gray-700 hover:text-primary cursor-pointer"
+                >Home</a
+              >
+              <div class="group relative">
+                <a
+                  href="properties.html"
+                  class="text-primary font-medium cursor-pointer"
+                  >Properties</a
+                >
+                <div
+                  class="absolute hidden group-hover:block w-48 bg-white shadow-lg rounded-md mt-2 py-2 z-50"
+                >
+                  <a
+                    href="properties.html?type=detached"
+                    class="block px-4 py-2 text-gray-700 hover:bg-gray-100"
+                    >Detached</a
+                  >
+                  <a
+                    href="properties.html?type=semi-detached"
+                    class="block px-4 py-2 text-gray-700 hover:bg-gray-100"
+                    >Semi-detached</a
+                  >
+                  <a
+                    href="properties.html?type=terraced"
+                    class="block px-4 py-2 text-gray-700 hover:bg-gray-100"
+                    >Terraced</a
+                  >
+                  <a
+                    href="properties.html?type=flat"
+                    class="block px-4 py-2 text-gray-700 hover:bg-gray-100"
+                    >Flat</a
+                  >
+                </div>
+              </div>
+              <a
+                href="search.html"
+                class="text-gray-700 hover:text-primary cursor-pointer"
+                >Search</a
+              >
+              <a
+                href="feedback.html"
+                class="text-gray-700 hover:text-primary cursor-pointer"
+                >Feedback</a
+              >
+            </div>
+          </nav>
+        </div>
+      </div>
+    </header>
+    <main>
+      <section class="relative">
+        <div
+          class="absolute inset-0 bg-cover bg-center"
+          style="background-image: url('images/background.jpg')"
+        ></div>
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32">
+          <div class="max-w-2xl">
+            <h1 class="text-4xl font-bold text-white mb-6">
+              Find Your Dream Home
+            </h1>
+            <p class="text-xl text-white mb-8">
+              Discover exceptional properties across the UK with Mannerings
+              Estate Agency. Your journey to the perfect home starts here.
+            </p>
+            <div class="flex space-x-4">
+              <button
+                class="bg-primary text-white px-6 py-3 !rounded-button cursor-pointer"
+              >
+                View Properties
+              </button>
+              <button
+                class="bg-white text-primary px-6 py-3 !rounded-button cursor-pointer"
+              >
+                Contact Us
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 class="text-3xl font-bold text-gray-900 mb-8">
+            Featured Properties
+          </h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+              <img
+                src="images/detached.jpg"
+                alt="Detached House"
+                class="w-full h-48 object-cover"
+              />
+              <div class="p-6">
+                <h3 class="text-xl font-semibold mb-2">
+                  Luxury Detached Villa
+                </h3>
+                <p class="text-gray-600 mb-4">Hampstead, London</p>
+                <div class="flex justify-between items-center">
+                  <span class="text-2xl font-bold text-primary"
+                    >£1,250,000</span
+                  >
+                  <button
+                    class="bg-primary text-white px-4 py-2 !rounded-button cursor-pointer"
+                  >
+                    View Details
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                <img
+                  src="images/flats.jpg"
+                  alt="Detached House"
+                  class="w-full h-48 object-cover"
+                />
+                <div class="p-6">
+                  <h3 class="text-xl font-semibold mb-2">
+                    Luxury flats Villa
+                  </h3>
+                  <p class="text-gray-600 mb-4">Hampstead, London</p>
+                  <div class="flex justify-between items-center">
+                    <span class="text-2xl font-bold text-primary"
+                      >£1,250,000</span
+                    >
+                    <button
+                      class="bg-primary text-white px-4 py-2 !rounded-button cursor-pointer"
+                    >
+                      View Details
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+              <img
+                src="images/semi-detached.jpg"
+                alt="Semi-detached House"
+                class="w-full h-48 object-cover"
+              />
+              <div class="p-6">
+                <h3 class="text-xl font-semibold mb-2">Modern Semi-detached</h3>
+                <p class="text-gray-600 mb-4">Richmond, London</p>
+                <div class="flex justify-between items-center">
+                  <span class="text-2xl font-bold text-primary">£875,000</span>
+                  <button
+                    class="bg-primary text-white px-4 py-2 !rounded-button cursor-pointer"
+                  >
+                    View Details
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+              <img
+                src="images/terraced.jpg"
+                alt="Terraced House"
+                class="w-full h-48 object-cover"
+              />
+              <div class="p-6">
+                <h3 class="text-xl font-semibold mb-2">Victorian Terrace</h3>
+                <p class="text-gray-600 mb-4">Greenwich, London</p>
+                <div class="flex justify-between items-center">
+                  <span class="text-2xl font-bold text-primary">£695,000</span>
+                  <button
+                    class="bg-primary text-white px-4 py-2 !rounded-button cursor-pointer"
+                  >
+                    View Details
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="text-center mb-16">
+            <h2 class="text-3xl font-bold text-gray-900 mb-4">
+              About Mannerings Estate Agency
+            </h2>
+            <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+              Founded in 1998, Mannerings Estate Agency has grown to become one
+              of London's most trusted property specialists. Our commitment to
+              excellence and personalized service has helped thousands of
+              clients find their perfect homes.
+            </p>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-16">
+            <div>
+              <h3 class="text-2xl font-semibold mb-4">Our Mission</h3>
+              <p class="text-gray-600 mb-6">
+                At Mannerings, we believe everyone deserves to find their ideal
+                home. Our mission is to provide exceptional service and
+                expertise to make the property journey smooth and successful for
+                every client.
+              </p>
+              <ul class="space-y-3">
+                <li class="flex items-start">
+                  <i class="ri-check-line text-primary mt-1"></i>
+                  <span class="ml-2 text-gray-600"
+                    >Professional property valuation services</span
+                  >
+                </li>
+                <li class="flex items-start">
+                  <i class="ri-check-line text-primary mt-1"></i>
+                  <span class="ml-2 text-gray-600"
+                    >Comprehensive property marketing</span
+                  >
+                </li>
+                <li class="flex items-start">
+                  <i class="ri-check-line text-primary mt-1"></i>
+                  <span class="ml-2 text-gray-600"
+                    >Expert negotiation on your behalf</span
+                  >
+                </li>
+              </ul>
+            </div>
+            <div>
+              <img
+                src="https://public.readdy.ai/ai/img_res/37a81a0c23e95e1f60415abeb86c30c3.jpg"
+                alt="Our Office"
+                class="rounded-lg shadow-lg"
+              />
+            </div>
+          </div>
+          <h2 class="text-3xl font-bold text-gray-900 mb-8">
+            Why Choose Mannerings
+          </h2>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="text-center">
+              <div
+                class="w-16 h-16 mx-auto mb-4 flex items-center justify-center"
+              >
+                <i class="ri-home-smile-line text-4xl text-primary"></i>
+              </div>
+              <h3 class="text-xl font-semibold mb-2">Expert Local Knowledge</h3>
+              <p class="text-gray-600">
+                Over 25 years of experience in the UK property market, with deep
+                understanding of local neighborhoods and market trends.
+              </p>
+            </div>
+            <div class="text-center">
+              <div
+                class="w-16 h-16 mx-auto mb-4 flex items-center justify-center"
+              >
+                <i class="ri-customer-service-line text-4xl text-primary"></i>
+              </div>
+              <h3 class="text-xl font-semibold mb-2">Dedicated Support</h3>
+              <p class="text-gray-600">
+                Personal service throughout your property journey, with a
+                dedicated agent available 7 days a week to assist you.
+              </p>
+            </div>
+            <div class="text-center">
+              <div
+                class="w-16 h-16 mx-auto mb-4 flex items-center justify-center"
+              >
+                <i class="ri-shield-check-line text-4xl text-primary"></i>
+              </div>
+              <h3 class="text-xl font-semibold mb-2">Trusted Agency</h3>
+              <p class="text-gray-600">
+                Rated 4.9/5 by our satisfied clients, with over 10,000
+                successful property transactions completed.
+              </p>
+            </div>
+          </div>
+          <div class="mt-16 bg-gray-50 rounded-lg p-8">
+            <h3 class="text-2xl font-semibold mb-6 text-center">
+              Our Services
+            </h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              <div class="bg-white p-6 rounded-lg shadow-sm">
+                <div class="w-12 h-12 flex items-center justify-center mb-4">
+                  <i class="ri-home-4-line text-3xl text-primary"></i>
+                </div>
+                <h4 class="text-lg font-semibold mb-2">Residential Sales</h4>
+                <p class="text-gray-600">
+                  Expert guidance through the entire home selling process
+                </p>
+              </div>
+              <div class="bg-white p-6 rounded-lg shadow-sm">
+                <div class="w-12 h-12 flex items-center justify-center mb-4">
+                  <i class="ri-building-line text-3xl text-primary"></i>
+                </div>
+                <h4 class="text-lg font-semibold mb-2">Property Letting</h4>
+                <p class="text-gray-600">
+                  Professional rental property management services
+                </p>
+              </div>
+              <div class="bg-white p-6 rounded-lg shadow-sm">
+                <div class="w-12 h-12 flex items-center justify-center mb-4">
+                  <i class="ri-funds-line text-3xl text-primary"></i>
+                </div>
+                <h4 class="text-lg font-semibold mb-2">Investment Advisory</h4>
+                <p class="text-gray-600">
+                  Strategic advice for property investors
+                </p>
+              </div>
+              <div class="bg-white p-6 rounded-lg shadow-sm">
+                <div class="w-12 h-12 flex items-center justify-center mb-4">
+                  <i class="ri-file-list-3-line text-3xl text-primary"></i>
+                </div>
+                <h4 class="text-lg font-semibold mb-2">Property Valuation</h4>
+                <p class="text-gray-600">Accurate market value assessments</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="flex items-center justify-between mb-8">
+            <h2 class="text-3xl font-bold text-gray-900">Our Properties</h2>
+            <div class="flex gap-4">
+              <div class="relative">
+                <button
+                  id="locationFilter"
+                  class="bg-white border border-gray-300 px-4 py-2 !rounded-button flex items-center gap-2"
+                >
+                  <i class="ri-map-pin-line"></i>
+                  <span>Location</span>
+                  <i class="ri-arrow-down-s-line"></i>
+                </button>
+                <div
+                  id="locationDropdown"
+                  class="hidden absolute top-full mt-2 w-48 bg-white shadow-lg rounded-md py-2 z-50"
+                >
+                  <button
+                    class="w-full text-left px-4 py-2 hover:bg-gray-100"
+                    data-value="all"
+                  >
+                    All Locations
+                  </button>
+                  <button
+                    class="w-full text-left px-4 py-2 hover:bg-gray-100"
+                    data-value="Croydon"
+                  >
+                    Croydon
+                  </button>
+                  <button
+                    class="w-full text-left px-4 py-2 hover:bg-gray-100"
+                    data-value="Redhill"
+                  >
+                    Redhill
+                  </button>
+                  <button
+                    class="w-full text-left px-4 py-2 hover:bg-gray-100"
+                    data-value="Crawley"
+                  >
+                    Crawley
+                  </button>
+                  <button
+                    class="w-full text-left px-4 py-2 hover:bg-gray-100"
+                    data-value="Brighton"
+                  >
+                    Brighton
+                  </button>
+                </div>
+              </div>
+              <div class="relative">
+                <button
+                  id="typeFilter"
+                  class="bg-white border border-gray-300 px-4 py-2 !rounded-button flex items-center gap-2"
+                >
+                  <i class="ri-home-4-line"></i>
+                  <span>Property Type</span>
+                  <i class="ri-arrow-down-s-line"></i>
+                </button>
+                <div
+                  id="typeDropdown"
+                  class="hidden absolute top-full mt-2 w-48 bg-white shadow-lg rounded-md py-2 z-50"
+                >
+                  <button
+                    class="w-full text-left px-4 py-2 hover:bg-gray-100"
+                    data-value="all"
+                  >
+                    All Types
+                  </button>
+                  <button
+                    class="w-full text-left px-4 py-2 hover:bg-gray-100"
+                    data-value="Detached"
+                  >
+                    Detached
+                  </button>
+                  <button
+                    class="w-full text-left px-4 py-2 hover:bg-gray-100"
+                    data-value="Semi-Detached"
+                  >
+                    Semi-Detached
+                  </button>
+                  <button
+                    class="w-full text-left px-4 py-2 hover:bg-gray-100"
+                    data-value="Terrace"
+                  >
+                    Terrace
+                  </button>
+                  <button
+                    class="w-full text-left px-4 py-2 hover:bg-gray-100"
+                    data-value="Flat"
+                  >
+                    Flat
+                  </button>
+                </div>
+              </div>
+              <div class="relative">
+                <button
+                  id="priceFilter"
+                  class="bg-white border border-gray-300 px-4 py-2 !rounded-button flex items-center gap-2"
+                >
+                  <i class="ri-money-pound-circle-line"></i>
+                  <span>Price Range</span>
+                  <i class="ri-arrow-down-s-line"></i>
+                </button>
+                <div
+                  id="priceDropdown"
+                  class="hidden absolute top-full mt-2 w-48 bg-white shadow-lg rounded-md py-2 z-50"
+                >
+                  <button
+                    class="w-full text-left px-4 py-2 hover:bg-gray-100"
+                    data-min="0"
+                    data-max="999999999"
+                  >
+                    All Prices
+                  </button>
+                  <button
+                    class="w-full text-left px-4 py-2 hover:bg-gray-100"
+                    data-min="0"
+                    data-max="100000"
+                  >
+                    Under £100,000
+                  </button>
+                  <button
+                    class="w-full text-left px-4 py-2 hover:bg-gray-100"
+                    data-min="100000"
+                    data-max="150000"
+                  >
+                    £100,000 - £150,000
+                  </button>
+                  <button
+                    class="w-full text-left px-4 py-2 hover:bg-gray-100"
+                    data-min="150000"
+                    data-max="200000"
+                  >
+                    £150,000 - £200,000
+                  </button>
+                  <button
+                    class="w-full text-left px-4 py-2 hover:bg-gray-100"
+                    data-min="200000"
+                    data-max="999999999"
+                  >
+                    Over £200,000
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            id="propertyGrid"
+            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          ></div>
+          <div id="noResults" class="hidden text-center py-8">
+            <p class="text-gray-500 text-lg">
+              No properties found matching your criteria.
+            </p>
+          </div>
+          <div class="mt-8 flex justify-center">
+            <button
+              id="loadMore"
+              class="bg-primary text-white px-6 py-3 !rounded-button"
+            >
+              Load More Properties
+            </button>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="bg-gray-900 text-white py-12">
+      <script>
+        document.addEventListener("DOMContentLoaded", function () {
+          let currentFilters = {
+            location: "all",
+            type: "all",
+            minPrice: 0,
+            maxPrice: 999999999,
+          };
+
+          let displayedProperties = 6;
+          const propertiesPerLoad = 6;
+
+          function toggleDropdown(dropdownId) {
+            const dropdown = document.getElementById(dropdownId);
+            const allDropdowns = document.querySelectorAll('[id$="Dropdown"]');
+            allDropdowns.forEach((d) => {
+              if (d.id !== dropdownId) d.classList.add("hidden");
+            });
+            dropdown.classList.toggle("hidden");
+          }
+
+          document
+            .getElementById("locationFilter")
+            .addEventListener("click", () =>
+              toggleDropdown("locationDropdown")
+            );
+          document
+            .getElementById("typeFilter")
+            .addEventListener("click", () => toggleDropdown("typeDropdown"));
+          document
+            .getElementById("priceFilter")
+            .addEventListener("click", () => toggleDropdown("priceDropdown"));
+
+          document.addEventListener("click", (e) => {
+            if (!e.target.closest(".relative")) {
+              document
+                .querySelectorAll('[id$="Dropdown"]')
+                .forEach((d) => d.classList.add("hidden"));
+            }
+          });
+
+          function updateFilterButtonText(filterId, text) {
+            const button = document.getElementById(filterId);
+            const span = button.querySelector("span");
+            span.textContent = text;
+          }
+
+          document
+            .querySelectorAll("#locationDropdown button")
+            .forEach((button) => {
+              button.addEventListener("click", function () {
+                const value = this.dataset.value;
+                currentFilters.location = value;
+                updateFilterButtonText(
+                  "locationFilter",
+                  value === "all" ? "Location" : value
+                );
+                filterAndDisplayProperties();
+              });
+            });
+
+          document
+            .querySelectorAll("#typeDropdown button")
+            .forEach((button) => {
+              button.addEventListener("click", function () {
+                const value = this.dataset.value;
+                currentFilters.type = value;
+                updateFilterButtonText(
+                  "typeFilter",
+                  value === "all" ? "Property Type" : value
+                );
+                filterAndDisplayProperties();
+              });
+            });
+
+          document
+            .querySelectorAll("#priceDropdown button")
+            .forEach((button) => {
+              button.addEventListener("click", function () {
+                const min = parseInt(this.dataset.min);
+                const max = parseInt(this.dataset.max);
+                currentFilters.minPrice = min;
+                currentFilters.maxPrice = max;
+                let text = "Price Range";
+                if (min === 0 && max === 999999999) text = "Price Range";
+                else if (min === 0) text = `Under £${(max / 1000).toFixed(0)}k`;
+                else if (max === 999999999)
+                  text = `Over £${(min / 1000).toFixed(0)}k`;
+                else
+                  text = `£${(min / 1000).toFixed(0)}k - £${(
+                    max / 1000
+                  ).toFixed(0)}k`;
+                updateFilterButtonText("priceFilter", text);
+                filterAndDisplayProperties();
+              });
+            });
+
+          function filterProperties() {
+            return propertyDatabase.filter((property) => {
+              const locationMatch =
+                currentFilters.location === "all" ||
+                property.town === currentFilters.location;
+              const typeMatch =
+                currentFilters.type === "all" ||
+                property.type === currentFilters.type;
+              const priceMatch =
+                property.price >= currentFilters.minPrice &&
+                property.price <= currentFilters.maxPrice;
+              return locationMatch && typeMatch && priceMatch;
+            });
+          }
+
+          function displayProperties(properties) {
+            const grid = document.getElementById("propertyGrid");
+            const noResults = document.getElementById("noResults");
+            const loadMoreBtn = document.getElementById("loadMore");
+
+            if (properties.length === 0) {
+              grid.innerHTML = "";
+              noResults.classList.remove("hidden");
+              loadMoreBtn.classList.add("hidden");
+              return;
+            }
+
+            noResults.classList.add("hidden");
+            grid.innerHTML = "";
+
+            const propertiesToShow = properties.slice(0, displayedProperties);
+            propertiesToShow.forEach((property) => {
+              const card = document.createElement("div");
+              card.className =
+                "bg-white rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:scale-105";
+              card.innerHTML = `
+<img src="images/terraced 3bd.jpg ${property.type.toLowerCase()} house with modern architecture and professional real estate photography style&width=600&height=400&seq=${
+                property.refNo
+              }&orientation=landscape"
+alt="${property.type} House"
+class="w-full h-48 object-cover">
+<div class="p-6">
+<h3 class="text-xl font-semibold mb-2">${property.type} - ${
+                property.bedrooms
+              } Bedrooms</h3>
+<p class="text-gray-600 mb-2">${property.town}</p>
+<p class="text-gray-600 mb-2">Ref: ${property.refNo}</p>
+<div class="flex gap-4 mb-4">
+<span class="text-gray-600"><i class="ri-thermometer-line"></i> Heating: ${
+                property.heating
+              }</span>
+<span class="text-gray-600"><i class="ri-parking-box-line"></i> Garage: ${
+                property.garage
+              }</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-2xl font-bold text-primary">£${property.price.toLocaleString()}</span>
+<button onclick="viewPropertyDetails('${
+                property.refNo
+              }')" class="bg-primary text-white px-4 py-2 !rounded-button">View Details</button>
+</div>
+</div>
+`;
+              grid.appendChild(card);
+            });
+
+            loadMoreBtn.classList.toggle(
+              "hidden",
+              displayedProperties >= properties.length
+            );
+          }
+
+          function filterAndDisplayProperties() {
+            displayedProperties = 6;
+            const filteredProperties = filterProperties();
+            displayProperties(filteredProperties);
+          }
+
+          document
+            .getElementById("loadMore")
+            .addEventListener("click", function () {
+              displayedProperties += propertiesPerLoad;
+              const filteredProperties = filterProperties();
+              displayProperties(filteredProperties);
+            });
+
+          filterAndDisplayProperties();
+        });
+
+        function viewPropertyDetails(refNo) {
+          const property = propertyDatabase.find((p) => p.refNo === refNo);
+          if (!property) return;
+
+          const modal = document.createElement("div");
+          modal.className =
+            "fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50";
+          modal.innerHTML = `
+<div class="bg-white rounded-lg max-w-2xl w-full mx-4 overflow-hidden">
+<div class="relative">
+<img src="images/detached 2bd.jpg ${property.type.toLowerCase()} house with modern architecture and professional real estate photography style, showing both exterior and interior details&width=800&height=400&seq=${
+            property.refNo
+          }&orientation=landscape"
+alt="${property.type} House"
+class="w-full h-64 object-cover">
+<button onclick="this.closest('.fixed').remove()" class="absolute top-4 right-4 bg-white rounded-full p-2 shadow-lg">
+<i class="ri-close-line text-xl"></i>
+</button>
+</div>
+<div class="p-6">
+<h2 class="text-2xl font-bold mb-4">${property.type} House - ${
+            property.bedrooms
+          } Bedrooms</h2>
+<div class="grid grid-cols-2 gap-4 mb-6">
+<div>
+<p class="text-gray-600">Location</p>
+<p class="font-semibold">${property.town}</p>
+</div>
+<div>
+<p class="text-gray-600">Reference</p>
+<p class="font-semibold">${property.refNo}</p>
+</div>
+<div>
+<p class="text-gray-600">Heating</p>
+<p class="font-semibold">${property.heating}</p>
+</div>
+<div>
+<p class="text-gray-600">Garage</p>
+<p class="font-semibold">${property.garage}</p>
+</div>
+</div>
+<div class="flex justify-between items-center border-t pt-6">
+<div>
+<p class="text-gray-600">Price</p>
+<p class="text-3xl font-bold text-primary">£${property.price.toLocaleString()}</p>
+</div>
+<button onclick="scheduleViewing('${
+            property.refNo
+          }')" class="bg-primary text-white px-6 py-3 !rounded-button">Schedule Viewing</button>
+</div>
+</div>
+</div>
+`;
+          document.body.appendChild(modal);
+        }
+
+        function scheduleViewing(refNo) {
+          const property = propertyDatabase.find((p) => p.refNo === refNo);
+          if (!property) return;
+
+          const modal = document.createElement("div");
+          modal.className =
+            "fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50";
+          modal.innerHTML = `
+<div class="bg-white rounded-lg max-w-md w-full mx-4">
+<div class="p-6">
+<div class="flex justify-between items-center mb-6">
+<h2 class="text-2xl font-bold">Schedule Viewing</h2>
+<button onclick="this.closest('.fixed').remove()" class="text-gray-500 hover:text-gray-700">
+<i class="ri-close-line text-xl"></i>
+</button>
+</div>
+<form id="viewingForm" class="space-y-4">
+<div>
+<label class="block text-gray-700 mb-2">Name</label>
+<input type="text" required class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary">
+</div>
+<div>
+<label class="block text-gray-700 mb-2">Email</label>
+<input type="email" required class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary">
+</div>
+<div>
+<label class="block text-gray-700 mb-2">Phone</label>
+<input type="tel" required class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary">
+</div>
+<div>
+<label class="block text-gray-700 mb-2">Preferred Date</label>
+<input type="date" required class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary">
+</div>
+<div>
+<label class="block text-gray-700 mb-2">Preferred Time</label>
+<select required class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary">
+<option value="">Select a time</option>
+<option>09:00 AM</option>
+<option>10:00 AM</option>
+<option>11:00 AM</option>
+<option>12:00 PM</option>
+<option>02:00 PM</option>
+<option>03:00 PM</option>
+<option>04:00 PM</option>
+</select>
+</div>
+<div class="flex justify-end gap-4 mt-6">
+<button type="button" onclick="this.closest('.fixed').remove()" class="px-6 py-2 border border-gray-300 rounded-lg text-gray-700">Cancel</button>
+<button type="submit" class="px-6 py-2 bg-primary text-white !rounded-button">Schedule</button>
+</div>
+</form>
+</div>
+</div>
+`;
+
+          document.body.appendChild(modal);
+
+          document
+            .getElementById("viewingForm")
+            .addEventListener("submit", function (e) {
+              e.preventDefault();
+              const successModal = document.createElement("div");
+              successModal.className =
+                "fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50";
+              successModal.innerHTML = `
+<div class="bg-white rounded-lg p-6 max-w-md w-full mx-4 text-center">
+<i class="ri-checkbox-circle-line text-5xl text-green-500 mb-4"></i>
+<h3 class="text-2xl font-bold mb-2">Viewing Scheduled!</h3>
+<p class="text-gray-600 mb-6">We'll contact you shortly to confirm your viewing appointment.</p>
+<button onclick="document.querySelectorAll('.fixed').forEach(el => el.remove())" class="bg-primary text-white px-6 py-2 !rounded-button">Close</button>
+</div>
+`;
+              document.body.appendChild(successModal);
+            });
+        }
+      </script>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+          <div>
+            <h3 class="text-xl font-semibold mb-4">About Us</h3>
+            <p class="text-gray-400">
+              Mannerings Estate Agency has been helping people find their
+              perfect homes since 1998.
+            </p>
+          </div>
+          <div>
+            <h3 class="text-xl font-semibold mb-4">Quick Links</h3>
+            <ul class="space-y-2">
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-400 hover:text-white cursor-pointer"
+                  >Properties</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-400 hover:text-white cursor-pointer"
+                  >Services</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-400 hover:text-white cursor-pointer"
+                  >About</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-400 hover:text-white cursor-pointer"
+                  >Contact</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="text-xl font-semibold mb-4">Contact</h3>
+            <ul class="space-y-2">
+              <li class="flex items-center text-gray-400">
+                <i class="ri-map-pin-line mr-2"></i>
+                123 Estate Street, London, UK
+              </li>
+              <li class="flex items-center text-gray-400">
+                <i class="ri-phone-line mr-2"></i>
+                +44 20 1234 5678
+              </li>
+              <li class="flex items-center text-gray-400">
+                <i class="ri-mail-line mr-2"></i>
+                info@mannerings.com
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="text-xl font-semibold mb-4">Follow Us</h3>
+            <div class="flex space-x-4">
+              <a href="#" class="text-gray-400 hover:text-white cursor-pointer">
+                <i class="ri-facebook-fill text-2xl"></i>
+              </a>
+              <a href="#" class="text-gray-400 hover:text-white cursor-pointer">
+                <i class="ri-twitter-fill text-2xl"></i>
+              </a>
+              <a href="#" class="text-gray-400 hover:text-white cursor-pointer">
+                <i class="ri-instagram-fill text-2xl"></i>
+              </a>
+              <a href="#" class="text-gray-400 hover:text-white cursor-pointer">
+                <i class="ri-linkedin-fill text-2xl"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div
+          class="mt-8 pt-8 border-t border-gray-800 text-center text-gray-400"
+        >
+          <p>© 2025 Mannerings Estate Agency. All rights reserved.</p>
+          <p>Last updated: <span id="current-date"></span></p>
+          <p>&copy; Amukoche Lewis</p>
+        </div>
+      </div>
+    </footer>
+    <script>
+      // Function to update the date
+      function updateDate() {
+        const dateElement = document.getElementById("current-date");
+        const currentDate = new Date();
+        dateElement.textContent = currentDate.toLocaleDateString();
+      }
+      // Call the function when the page loads
+      window.onload = updateDate;
+      const propertyDatabase = [
+        {
+          refNo: "13678",
+          town: "Croydon",
+          type: "Detached",
+          bedrooms: 4,
+          price: 250000,
+          heating: "Yes",
+          garage: "Double",
+          image: "images/detached 4bd.jpg",
+        },
+        {
+          refNo: "13679",
+          town: "Croydon",
+          type: "Semi-Detached",
+          bedrooms: 3,
+          price: 165000,
+          heating: "No",
+          garage: "Single",
+          image: "images/semi-detached 3bd.jpg",
+        },
+        {
+          refNo: "13700",
+          town: "Redhill",
+          type: "Flat",
+          bedrooms: 2,
+          price: 110000,
+          heating: "Yes",
+          garage: "None",
+          image: "images/flats 2bd.jpg",
+        },
+        {
+          refNo: "13702",
+          town: "Crawley",
+          type: "Detached",
+          bedrooms: 3,
+          price: 220000,
+          heating: "Yes",
+          garage: "Double",
+          image: "images/detached 3bd.jpg",
+        },
+        {
+          refNo: "13703",
+          town: "Crawley",
+          type: "Semi-Detached",
+          bedrooms: 4,
+          price: 145000,
+          heating: "Yes",
+          garage: "Single",
+          image: "images/semi-detached 4bd.jpg",
+        },
+        {
+          refNo: "13705",
+          town: "Croydon",
+          type: "Terrace",
+          bedrooms: 3,
+          price: 95000,
+          heating: "No",
+          garage: "None",
+          image: "images/terrace 3bd.jpg",
+        },
+        {
+          refNo: "13708",
+          town: "Brighton",
+          type: "Terrace",
+          bedrooms: 3,
+          price: 150000,
+          heating: "Yes",
+          garage: "None",
+          image: "images/terrace 3bd.jpg",
+        },
+        {
+          refNo: "13709",
+          town: "Redhill",
+          type: "Detached",
+          bedrooms: 3,
+          price: 165000,
+          heating: "Yes",
+          garage: "Single",
+          image: "images/detached 3bd.jpg",
+        },
+        {
+          refNo: "13711",
+          town: "Crawley",
+          type: "Detached",
+          bedrooms: 3,
+          price: 175000,
+          heating: "Yes",
+          garage: "Double",
+          image: "images/detached 3bd.jpg",
+        },
+        {
+          refNo: "13712",
+          town: "Brighton",
+          type: "Flat",
+          bedrooms: 2,
+          price: 75000,
+          heating: "Yes",
+          garage: "None",
+          image: "images/flat 2bd.jpg",
+          
+        },
+      ];
+      document.addEventListener("DOMContentLoaded", function () {
+        const searchForm = document.querySelector("form");
+        const searchBtn = document.getElementById("searchBtn");
+        const searchResults = document.getElementById("searchResults");
+        const locationSelect = document.getElementById("location");
+        const propertyTypeSelect = document.getElementById("propertyType");
+        searchBtn.addEventListener("click", function () {
+          const selectedLocation = locationSelect.value;
+          const selectedType = propertyTypeSelect.value;
+          const filteredProperties = propertyDatabase.filter((property) => {
+            if (selectedLocation && selectedType) {
+              return (
+                property.town === selectedLocation &&
+                property.type === selectedType
+              );
+            } else if (selectedLocation) {
+              return property.town === selectedLocation;
+            } else if (selectedType) {
+              return property.type === selectedType;
+            }
+            return true;
+          });
+          searchResults.innerHTML = "";
+          if (filteredProperties.length === 0) {
+            searchResults.innerHTML =
+              '<div class="col-span-full text-center text-gray-500">No properties found matching your criteria.</div>';
+            return;
+          }
+          filteredProperties.forEach((property) => {
+            const propertyCard = `
+      <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+      <img src="images/flats 3bd.jpg ${property.type.toLowerCase()} house with modern architecture and professional real estate photography style&width=600&height=400&seq=${
+              property.refNo
+            }&orientation=landscape"
+      alt="${property.type} House"
+      class="w-full h-48 object-cover">
+      <div class="p-6">
+      <h3 class="text-xl font-semibold mb-2">${property.type} - ${
+              property.bedrooms
+            } Bedrooms</h3>
+      <p class="text-gray-600 mb-2">${property.town}</p>
+      <p class="text-gray-600 mb-2">Ref: ${property.refNo}</p>
+      <div class="flex gap-4 mb-4">
+      <span class="text-gray-600"><i class="ri-thermometer-line"></i> Heating: ${
+        property.heating
+      }</span>
+      <span class="text-gray-600"><i class="ri-parking-box-line"></i> Garage: ${
+        property.garage
+      }</span>
+      </div>
+      <div class="flex justify-between items-center">
+      <span class="text-2xl font-bold text-primary">£${property.price.toLocaleString()}</span>
+      <button class="bg-primary text-white px-4 py-2 !rounded-button cursor-pointer">View Details</button>
+      </div>
+      </div>
+      </div>
+      `;
+            searchResults.innerHTML += propertyCard;
+          });
+        });
+        if (searchForm) {
+          searchForm.addEventListener("submit", function (e) {
+            e.preventDefault();
+            const formData = new FormData(searchForm);
+            const message = document.createElement("div");
+            message.className =
+              "fixed top-4 right-4 bg-green-500 text-white px-6 py-3 rounded shadow-lg";
+            message.textContent =
+              "Thank you for your message. We will contact you soon.";
+            document.body.appendChild(message);
+            setTimeout(() => message.remove(), 3000);
+            searchForm.reset();
+          });
+        }
+      });
+    </script>
+  </body>
+</html>
